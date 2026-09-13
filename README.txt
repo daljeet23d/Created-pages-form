@@ -1,0 +1,1 @@
+Updated warning-free Acode version. index.html = user form; admin.html = admin panel. Both use the same localStorage key for testing on the same browser/device. For real users on different devices, connect a cloud database such as Supabase.

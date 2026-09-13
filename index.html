@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Create Your Page</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f5f8;padding:20px}.box{max-width:450px;margin:25px auto;background:#fff;padding:25px;border-radius:18px;box-shadow:0 5px 20px #0002}h1{text-align:center;margin:0 0 8px}.sub{text-align:center;color:#777;margin-bottom:25px}label{display:block;font-weight:bold;margin:15px 0 7px}input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;font-size:15px;outline:0}button{width:100%;padding:14px;margin-top:22px;background:#111;color:white;border:0;border-radius:10px;font-weight:bold;font-size:16px}.ok{display:none;margin-top:15px;padding:12px;background:#e5f8eb;color:green;text-align:center;border-radius:10px}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>🚀 Create Your Page</h1>
+<div class="sub">Please fill your details</div>
+<form id="userForm">
+<label>Name</label><input id="userName" type="text" required placeholder="Enter your name">
+<label>Mobile Number</label><input id="userPhone" type="tel" required placeholder="Enter mobile number">
+<label>Gmail</label><input id="userEmail" type="email" required placeholder="Enter your Gmail">
+<label>Platform</label>
+<select id="userPlatform" required>
+<option value="">Select Platform</option><option>Facebook</option><option>Instagram</option><option>YouTube</option><option>ShareChat</option><option>Other</option>
+</select>
+<button type="submit">Submit Details</button>
+<div id="successMessage" class="ok">✅ Details submitted successfully!</div>
+</form>
+</div>
+<script>
+// @ts-nocheck
+const STORAGE_KEY="create_page_users";
+const form=document.getElementById("userForm");
+const successMessage=document.getElementById("successMessage");
+
+form.addEventListener("submit",function(event){
+event.preventDefault();
+
+const user={
+id:Date.now(),
+name:document.getElementById("userName").value.trim(),
+phone:document.getElementById("userPhone").value.trim(),
+email:document.getElementById("userEmail").value.trim(),
+platform:document.getElementById("userPlatform").value,
+submittedAt:new Date().toLocaleString()
+};
+
+const users=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+users.push(user);
+localStorage.setItem(STORAGE_KEY,JSON.stringify(users));
+
+form.reset();
+successMessage.style.display="block";
+});
+</script>
+</body>
+</html>
